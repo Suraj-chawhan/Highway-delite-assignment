@@ -127,7 +127,7 @@ const Signup = ({ setUser }: { setUser: any }) => {
         {error && <p style={{ color: "red", marginTop: 8 }}>{error}</p>}
 
         <div className="signup-footer">
-          Already have an account? <a href="/login">Sign in</a>
+          Already have an account? <p onClick={()=>navigate("/login")}>Sign in</p>
         </div>
       </div>
 
