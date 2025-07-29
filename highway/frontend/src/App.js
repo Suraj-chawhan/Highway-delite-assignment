@@ -6,6 +6,7 @@ import Home from './pages/Home.tsx';
 import Login from './pages/Signin.tsx';
 import Signup from './pages/Signup.tsx';
 import NotFound from "./pages/Not-found.tsx"
+import Welcome from "./pages/Welcome.tsx"
 function App() {
   const [user, setUser] = useState(null);
 
@@ -23,7 +24,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={user ? <Home user={user} setUser={setUser}/> : <Navigate to="/login" />} />
-          <Route path="/login" element={!user ? <Login setUser={setUser} /> : <Navigate to="/" />} />
+        <Route path="/welcome" element={user ? <Welcome user={user} setUser={setUser}/> : <Navigate to="/login" />} />
+        
+            <Route path="/login" element={!user ? <Login setUser={setUser} /> : <Navigate to="/" />} />
           <Route path="/signup" element={!user ? <Signup setUser={setUser} /> : <Navigate to="/" />} />
         <Route path="*" element={<NotFound />} />
             </Routes>
