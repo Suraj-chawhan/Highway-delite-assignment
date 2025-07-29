@@ -23,11 +23,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={user ? <Home user={user} setUser={setUser}/> : <Navigate to="/login" />} />
+          <Route path="/" element={ <Home user={user} setUser={setUser}/>} />
         <Route path="/welcome" element={user ? <Welcome user={user} setUser={setUser}/> : <Navigate to="/login" />} />
         
-            <Route path="/login" element={!user ? <Login setUser={setUser} /> : <Navigate to="/" />} />
-          <Route path="/signup" element={!user ? <Signup setUser={setUser} /> : <Navigate to="/" />} />
+            <Route path="/login" element={!user ? <Login setUser={setUser} /> : <Navigate to="/welcome" />} />
+          <Route path="/signup" element={!user ? <Signup setUser={setUser} /> : <Navigate to="/welcome" />} />
         <Route path="*" element={<NotFound />} />
             </Routes>
       </BrowserRouter>
