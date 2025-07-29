@@ -12,11 +12,16 @@ require("dotenv").config();
 connectDB();
 
 const app = express();
-app.use(cors());
+const allowedOrigin = "https://highway-delite-assignment-78sq.vercel.app";
+
+app.use(cors({
+  origin: allowedOrigin,
+  credentials: true, // if you're using cookies or HTTP auth
+}));
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.get("/", (req, res) => res.send("Notes App Running 🚀"));
+app.get("/", (req, res) => res.send("Notes App Backend is Running Fine🚀"));
 
 // ✅ Send OTP
 app.post("/send-otp", async (req, res) => {
