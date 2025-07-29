@@ -94,7 +94,7 @@ const Signin = ({ setUser }: { setUser: any }) => {
         </div>
 
         <div className="signin-footer">
-          Need an account? <a href="/signup">Create one</a>
+          Need an account? <p onClick={()=>navigate("/signup")} style={{color:"#0000ee"}}>Create one</p>
         </div>
       </div>
 
