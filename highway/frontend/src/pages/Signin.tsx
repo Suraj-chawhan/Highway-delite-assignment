@@ -51,7 +51,7 @@ const Signin = ({ setUser }: { setUser: any }) => {
 
       localStorage.setItem("user", JSON.stringify(data));
       setUser(data);
-      navigate("/");
+      navigate("/welcome");
     } catch (err: any) {
       setError(err.message || "Invalid OTP or server error");
     }
