@@ -3,108 +3,115 @@ import { useNavigate } from "react-router-dom";
 import "./Signin.css";
 
 const Signin = ({ setUser }: { setUser: any }) => {
-  const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
-  const [otpEnabled, setOtpEnabled] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [otpEnabled, setOtpEnabled] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleGetOtp = async () => {
-    try {
-      setError("");
+  const handleGetOtp = async () => {
+    try {
+      setError("");
 
-      const checkRes = await fetch(`${process.env.REACT_APP_API_BASE_URL}/check-email?email=${encodeURIComponent(email)}`);
-      const checkData = await checkRes.json();
+      const checkRes = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/check-email?email=${encodeURIComponent(email)}`
+      );
+      const checkData = await checkRes.json();
 
-      if (!checkRes.ok || !checkData.exists) {
-        setError("This email is not registered. Please sign up first.");
-        return;
-      }
+      if (!checkRes.ok || !checkData.exists) {
+        setError("This email is not registered. Please sign up first.");
+        return;
+      }
 
-      const otpRes = await fetch(`${process.env.REACT_APP_API_BASE_URL}/send-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+      const otpRes = await fetch(`${process.env.REACT_APP_API_BASE_URL}/send-otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
-      if (!otpRes.ok) throw new Error("Failed to send OTP");
-      setOtpEnabled(true);
-      setError("");
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
-    }
-  };
+      if (!otpRes.ok) throw new Error("Failed to send OTP");
+      setOtpEnabled(true);
+      setError("");
+    } catch (err: any) {
+      setError(err.message || "Something went wrong");
+    }
+  };
 
-  const handleVerifyOtp = async () => {
-    try {
-      setError("");
-      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/verify-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp }),
-      });
+  const handleVerifyOtp = async () => {
+    try {
+      setError("");
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/verify-otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp }),
+      });
 
-      const data = await res.json();
-      if (!data.token) throw new Error("Invalid or expired OTP");
+      const data = await res.json();
+      if (!data.token) throw new Error("Invalid or expired OTP");
 
-      localStorage.setItem("user", JSON.stringify(data));
-      setUser(data);
-      navigate("/");
-    } catch (err: any) {
-      setError(err.message || "Invalid OTP or server error");
-    }
-  };
+      localStorage.setItem("user", JSON.stringify(data));
+      setUser(data);
+      navigate("/");
+    } catch (err: any) {
+      setError(err.message || "Invalid OTP or server error");
+    }
+  };
 
-  return (
-    <div className="signin-container">
-      <div className="signin-left">
-        <h1>Sign in</h1>
-        <p>Please login to continue to your account.</p>
+  return (
+    <div className="signin-container">
+      <div className="signin-left">
+        <h1>Sign in</h1>
+        <p>Please login to continue to your account.</p>
 
-        <div className="signin-form">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <div className="signin-form">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-          {!otpEnabled && email && (
-            <button onClick={handleGetOtp}>Get OTP</button>
-          )}
+          {!otpEnabled && email && (
+            <button onClick={handleGetOtp}>Get OTP</button>
+          )}
 
-          {otpEnabled && (
-            <>
-              <input
-                type="text"
-                placeholder="Enter OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-              />
-              <button onClick={handleVerifyOtp}>Verify & Sign in</button>
-              <button onClick={handleGetOtp} style={{ marginTop: "10px" }}>
-                Resend OTP
-              </button>
-            </>
-          )}
+          {otpEnabled && (
+            <>
+              <input
+                type="text"
+                placeholder="Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
+              <button onClick={handleVerifyOtp}>Verify & Sign in</button>
+              <button onClick={handleGetOtp} style={{ marginTop: "10px" }}>
+                Resend OTP
+              </button>
+            </>
+          )}
 
-          {error && <p style={{ color: "red", marginTop: 10 }}>{error}</p>}
-        </div>
+          {error && <p style={{ color: "red", marginTop: 10 }}>{error}</p>}
+        </div>
 
-        <div className="signin-footer">
-          Need an account?{" "}
-          <span onClick={() => navigate("/signup")} style={{ color: "#2563eb", cursor: "pointer" }}>
-            Create one
-          </span>
-        </div>
-      </div>
+        <div className="signin-footer">
+          <p>
+            Need an account?{" "}
+            <span
+              onClick={() => navigate("/signup")}
+              style={{ color: "#2563eb", cursor: "pointer" }}
+            >
+              Create one
+            </span>
+          </p>
+        </div>
+      </div>
 
-      <div className="signin-right">
-        <img src="/blue.jpg" alt="Login Visual" />
-      </div>
-    </div>
-  );
+      <div className="signin-right">
+        <img src="/blue.jpg" alt="Login Visual" />
+      </div>
+    </div>
+  );
 };
 
 export default Signin;
-          
+               
