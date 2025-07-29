@@ -83,11 +83,7 @@ const Signup = ({ setUser }: { setUser: any }) => {
                   max={new Date().toISOString().split("T")[0]} // Prevent future dates
                   onChange={(e) => setDob(e.target.value)}
                 />
-                {dob && (
-                  <small style={{ color: "gray" }}>
-                    Selected DOB: {new Date(dob).toLocaleDateString()}
-                  </small>
-                )}
+      
               </div>
 
               <div className="form-group">
