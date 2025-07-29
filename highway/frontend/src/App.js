@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Home from './pages/Home.tsx';
 import Login from './pages/Signin.tsx';
 import Signup from './pages/Signup.tsx';
-
+import NotFound from "./pages/Not-found.tsx"
 function App() {
   const [user, setUser] = useState(null);
 
@@ -25,7 +25,8 @@ function App() {
           <Route path="/" element={user ? <Home user={user} setUser={setUser}/> : <Navigate to="/login" />} />
           <Route path="/login" element={!user ? <Login setUser={setUser} /> : <Navigate to="/" />} />
           <Route path="/signup" element={!user ? <Signup setUser={setUser} /> : <Navigate to="/" />} />
-        </Routes>
+        <Route path="*" element={<NotFound />} />
+            </Routes>
       </BrowserRouter>
     </div>
   );
