@@ -35,12 +35,12 @@ A full-stack Notes Maker web application that allows users to sign up, sign in w
 - ✅ Protected routes using JWT
 
 ---
-```Clone the repository```
-###Install important dependencies using
-```npm install```
-###Run backend using following command make sure .env is added
-```node server.js```
-###Run frotend using fowlling command 
-```npm start```
+- ```Clone the repository```
+- ###Install important dependencies using
+- ```npm install```
+- ###Run backend using following command make sure .env is added
+- ```node server.js```
+- ###Run frontend using fowlling command 
+- ```npm start```
 
 
