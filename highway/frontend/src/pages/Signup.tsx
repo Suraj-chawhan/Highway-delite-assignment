@@ -49,7 +49,7 @@ const Signup = ({ setUser }: { setUser: any }) => {
 
       localStorage.setItem("user", JSON.stringify(data));
       setUser(data);
-      navigate("/");
+      navigate("/welcome");
     } catch {
       setError("Invalid or expired OTP");
     }
