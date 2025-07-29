@@ -13,7 +13,6 @@ const Signin = ({ setUser }: { setUser: any }) => {
     try {
       setError("");
 
-     
       const checkRes = await fetch(`${process.env.REACT_APP_API_BASE_URL}/check-email?email=${encodeURIComponent(email)}`);
       const checkData = await checkRes.json();
 
@@ -22,7 +21,6 @@ const Signin = ({ setUser }: { setUser: any }) => {
         return;
       }
 
-     
       const otpRes = await fetch(`${process.env.REACT_APP_API_BASE_URL}/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -94,7 +92,10 @@ const Signin = ({ setUser }: { setUser: any }) => {
         </div>
 
         <div className="signin-footer">
-          Need an account? <p onClick={()=>navigate("/signup")} style={{color:"#0000ee"}}>Create one</p>
+          Need an account?{" "}
+          <span onClick={() => navigate("/signup")} style={{ color: "#2563eb", cursor: "pointer" }}>
+            Create one
+          </span>
         </div>
       </div>
 
@@ -106,4 +107,4 @@ const Signin = ({ setUser }: { setUser: any }) => {
 };
 
 export default Signin;
-        
+          
