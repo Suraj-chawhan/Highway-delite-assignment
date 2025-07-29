@@ -13,7 +13,7 @@ const Signin = ({ setUser }: { setUser: any }) => {
     try {
       setError("");
 
-      // ✅ Step 1: Check if user exists
+     
       const checkRes = await fetch(`${process.env.REACT_APP_API_BASE_URL}/check-email?email=${encodeURIComponent(email)}`);
       const checkData = await checkRes.json();
 
@@ -22,7 +22,7 @@ const Signin = ({ setUser }: { setUser: any }) => {
         return;
       }
 
-      // ✅ Step 2: Send OTP
+     
       const otpRes = await fetch(`${process.env.REACT_APP_API_BASE_URL}/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -84,6 +84,9 @@ const Signin = ({ setUser }: { setUser: any }) => {
                 onChange={(e) => setOtp(e.target.value)}
               />
               <button onClick={handleVerifyOtp}>Verify & Sign in</button>
+              <button onClick={handleGetOtp} style={{ marginTop: "10px" }}>
+                Resend OTP
+              </button>
             </>
           )}
 
@@ -103,3 +106,4 @@ const Signin = ({ setUser }: { setUser: any }) => {
 };
 
 export default Signin;
+        
