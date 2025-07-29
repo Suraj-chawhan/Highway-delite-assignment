@@ -1,0 +1,52 @@
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #4f46e5, #3b82f6, #06b6d4);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease infinite;
+  color: #ffffff;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.welcome-content {
+  max-width: 600px;
+}
+
+.welcome-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.welcome-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #e0e7ff;
+}
+
+.welcome-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #ffffff;
+  color: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s;
+}
+
+.welcome-button:hover {
+  background-color: #e0e7ff;
+  color: #1e40af;
+}
